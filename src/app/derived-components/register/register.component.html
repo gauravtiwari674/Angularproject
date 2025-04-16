@@ -1,0 +1,30 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name</label>
+    <input id="name" formControlName="name" placeholder="Name" required />
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+    <input id="email" formControlName="email" placeholder="Email" type="email" required />
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input id="password" formControlName="password" placeholder="Password" type="password" required />
+  </div>
+
+  <button type="submit">Register</button>
+</form>
+
+<!-- Display success message and QR code after successful registration -->
+<div *ngIf="registrationSuccess">
+  <h3>Registration Successful!</h3>
+  <p>Your registration is complete. Below is your QR code:</p>
+  <img *ngIf="qrCode" [src]="qrCode" alt="Generated QR Code" />
+</div>
+
+<!-- Display error message if registration fails -->
+<div *ngIf="!registrationSuccess">
+  <p *ngIf="submitted && !registerForm.valid" style="color: red;">Please fill out the form correctly.</p>
+</div>

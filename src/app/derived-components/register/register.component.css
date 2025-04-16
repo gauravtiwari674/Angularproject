@@ -1,0 +1,22 @@
+.register-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 30px;
+    background: #e8f0fe;
+    border-radius: 10px;
+    text-align: center;
+  }
+  input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+  }
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+  }
+  
