@@ -11,15 +11,14 @@ export class AttendanceComponent {
   constructor(private qrService: QrService) {}
 
   onScanSuccess(uuid: string) {
-    if (uuid.startsWith('http://') || uuid.startsWith('https://')) {
-      window.open(uuid, '_blank');
     this.qrService.markAttendance(uuid)
     .then(response => {
+      window.alert('Attendance marked for:'+ uuid)
       console.log('Attendance marked for:', uuid);
     })
     .catch(error => {
+      window.alert('Error marking attendance:'+ error)
       console.error('Error marking attendance:', error);
     });
   }
-}
 }

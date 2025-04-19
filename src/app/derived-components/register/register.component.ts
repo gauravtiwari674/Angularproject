@@ -28,14 +28,14 @@ export class RegisterComponent {
   onSubmit() {
     this.submitted = true;
     if (this.registerForm.valid) {
-      const { organisationid, password } = this.registerForm.value;
-      const employeeData = { organisationid, password };
+      const { organisationid, email } = this.registerForm.value;
+      const employeeData = { organisationid, email };
 
       this.employeeService.registerEmployee(employeeData)
         .then(response => {
           console.log('Employee registered successfully:', response);
           
-          const uuid = response.uuid;  // Assuming backend returns UUID as 'uuid'
+          const uuid = response.id;  // Assuming backend returns UUID as 'uuid'
           this.generateQRCode(uuid);  // Generate QR code from UUID
 
           // Set registration success flag
@@ -44,6 +44,11 @@ export class RegisterComponent {
         })
         .catch(error => {
           console.error('Registration failed:', error);
+          if(error.status==404){
+            window.alert("Organisation ID not Found");
+          }else if(error.status==409){
+            window.alert("Email Already Registered");
+          }  
           this.registrationSuccess = false;
         });
     }
@@ -51,6 +56,7 @@ export class RegisterComponent {
 
   // Function to generate QR code from UUID
   generateQRCode(uuid: string) {
+    console.log(uuid)
     QRCode.toDataURL(uuid)
       .then((url: string) => {
         this.qrCode = url; // Set the QR code image source

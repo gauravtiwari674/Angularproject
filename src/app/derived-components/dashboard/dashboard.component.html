@@ -27,16 +27,19 @@
 </div>
 
 <div class="dashboard">
-    <h2>Employee Dashboard</h2>
-    <table>
-      <tr>
-        <th>Employee Id</th><th>Email</th><th>Timestamp</th>
+  <h2>Employee Dashboard</h2>
+  <table>
+    <tr>
+      <th>Employee Id</th>
+      <th>Email</th>
+      <th>Timestamp</th>
+    </tr>
+    <ng-container *ngFor="let emp of employee">
+      <tr *ngFor="let log of emp.logs">
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ log }}</td>
       </tr>
-      <tr *ngFor="let log of extractedLogs">
-        <td>{{ log.employeeId }}</td>
-        <td>{{ log.email }}</td>
-        <td>{{ log.timestamp }}</td>
-        
-      </tr>
-    </table>
-  </div>
+    </ng-container>
+  </table>
+</div>

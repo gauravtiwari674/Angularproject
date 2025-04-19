@@ -9,6 +9,7 @@ export class EmployeeService {
   async getAllEmployees(): Promise<any> {
     try {
       const response = await axios.get(`${this.baseUrl}/organisation/employees`);
+      console.log(response)
       return response.data;
     } catch (error) {
       throw error;
@@ -17,7 +18,10 @@ export class EmployeeService {
 
   async registerEmployee(employeeData: any): Promise<any> {
     try {
-      const response = await axios.post(`${this.baseUrl}/register`, employeeData);
+      const response = await axios.post(`${this.baseUrl}/employee`, {
+        organisationId:employeeData.organisationid,
+        email:employeeData.email
+      });
       return response.data;
     } catch (error) {
       throw error;
@@ -35,7 +39,7 @@ export class EmployeeService {
 
   async deleteEmployeeById(id: string): Promise<any> {
     try {
-      const response = await axios.delete(`${this.baseUrl}/${id}`);
+      const response = await axios.delete(`${this.baseUrl}/employee/${id}`);
       return response.data;
     } catch (error) {
       throw error;

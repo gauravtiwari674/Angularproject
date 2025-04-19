@@ -10,7 +10,7 @@ import { timestamp } from 'rxjs';
 })
 export class DashboardComponent implements OnInit{
   employeeId: string = '';
-  extractedLogs: any[] = [];
+  employee: any[] = [];
   deleteSuccess: boolean = false;
   deleteError: string = '';
 
@@ -19,33 +19,27 @@ export class DashboardComponent implements OnInit{
   ngOnInit() {
     this.employeeService.getAllEmployees()
     .then(response => {
-      this.extractedLogs = response.logs.map((log: string) => {
-        const parts = log.split(" ");
-        return {
-          employeeId: parts[1],
-          email: parts[5],
-          timestamp: parts[7]
-        };
-      });
+      console.log(response)
+      this.employee = response;
     })
     .catch(err => console.error(err));
 
 }
 
-fetchEmployees() {
-  this.employeeService.getAllEmployees()
-  .then(response => {
-    this.extractedLogs = response.logs.map((log: string) => {
-      const parts = log.split(" ");
-      return {
-        employeeId: parts[1],
-        email: parts[5],
-        timestamp: parts[7]
-      };
-    });
-  })
-  .catch(err => console.error(err));
-}
+// fetchEmployees() {
+//   this.employeeService.getAllEmployees()
+//   .then(response => {
+//     this.extractedLogs = response.logs.map((log: string) => {
+//       const parts = log.split(" ");
+//       return {
+//         employeeId: parts[1],
+//         email: parts[5],
+//         timestamp: parts[7]
+//       };
+//     });
+//   })
+//   .catch(err => console.error(err));
+// }
 
 onDelete() {
   if (!this.employeeId) return;
