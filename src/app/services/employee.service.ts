@@ -4,11 +4,11 @@ import axios from 'axios';
   providedIn: 'root'
 })
 export class EmployeeService {
-  private baseUrl = 'http://localhost:8080/api/employees';
+  private baseUrl = 'http://localhost:8080';
 
   async getAllEmployees(): Promise<any> {
     try {
-      const response = await axios.get(this.baseUrl);
+      const response = await axios.get(`${this.baseUrl}/organisation/employees`);
       return response.data;
     } catch (error) {
       throw error;
@@ -18,6 +18,15 @@ export class EmployeeService {
   async registerEmployee(employeeData: any): Promise<any> {
     try {
       const response = await axios.post(`${this.baseUrl}/register`, employeeData);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async OrganisationLogin(OrganisationData: any): Promise<any> {
+    try {
+      const response = await axios.post(`${this.baseUrl}/organisation/login`, OrganisationData);
       return response.data;
     } catch (error) {
       throw error;

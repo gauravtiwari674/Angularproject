@@ -1,5 +1,6 @@
 import { Component , OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
+import { timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,39 +9,57 @@ import { EmployeeService } from '../../services/employee.service';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit{
-  employees: any[] = [];
+  employeeId: string = '';
+  extractedLogs: any[] = [];
+  deleteSuccess: boolean = false;
+  deleteError: string = '';
 
   constructor(private employeeService: EmployeeService) {}
 
   ngOnInit() {
     this.employeeService.getAllEmployees()
-    .then(data => {
-      this.employees = data;
+    .then(response => {
+      this.extractedLogs = response.logs.map((log: string) => {
+        const parts = log.split(" ");
+        return {
+          employeeId: parts[1],
+          email: parts[5],
+          timestamp: parts[7]
+        };
+      });
     })
-    .catch(error => {
-      console.error('Error fetching employees:', error);
-    });
+    .catch(err => console.error(err));
+
 }
 
 fetchEmployees() {
   this.employeeService.getAllEmployees()
-    .then(data => {
-      this.employees = data;
+  .then(response => {
+    this.extractedLogs = response.logs.map((log: string) => {
+      const parts = log.split(" ");
+      return {
+        employeeId: parts[1],
+        email: parts[5],
+        timestamp: parts[7]
+      };
+    });
+  })
+  .catch(err => console.error(err));
+}
+
+onDelete() {
+  if (!this.employeeId) return;
+
+  this.employeeService.deleteEmployeeById(this.employeeId)
+    .then(() => {
+      this.deleteSuccess = true;
+      this.deleteError = '';
+      this.employeeId = '';
     })
     .catch(error => {
-      console.error('Error fetching employees:', error);
+      this.deleteError = error?.message || 'Something went wrong.';
+      this.deleteSuccess = false;
     });
 }
 
-deleteUser(uuid: string) {
-  this.employeeService.deleteEmployeeById(uuid)
-    .then(() => {
-      console.log('User deleted:', uuid);
-      // Refresh the list
-      this.fetchEmployees();
-    })
-    .catch(error => {
-      console.error('Error deleting user:', error);
-    });
-}
 }

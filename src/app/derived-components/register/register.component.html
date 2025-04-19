@@ -1,7 +1,7 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div>
-    <label for="name">Name</label>
-    <input id="name" formControlName="name" placeholder="Name" required />
+    <label for="organisatinid">Organisation Id</label>
+    <input id="organisationid" formControlName="organisationid" placeholder="organisationid" type = "text" required />
   </div>
 
   <div>
@@ -9,10 +9,7 @@
     <input id="email" formControlName="email" placeholder="Email" type="email" required />
   </div>
 
-  <div>
-    <label for="password">Password</label>
-    <input id="password" formControlName="password" placeholder="Password" type="password" required />
-  </div>
+  
 
   <button type="submit">Register</button>
 </form>

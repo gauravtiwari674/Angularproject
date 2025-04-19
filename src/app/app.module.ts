@@ -5,12 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { RegisterComponent } from './derived-components/register/register.component';
 import { DashboardComponent } from './derived-components/dashboard/dashboard.component';
 import { AttendanceComponent } from './derived-components/attendance/attendance.component';
 import { DeleteUserComponent } from './derived-components/delete-user/delete-user.component';
 import { HomeComponent } from './derived-components/home/home.component';
+import { OrganisationLoginComponent } from './derived-components/organisation-login/organisation-login.component';
 
 
 @NgModule({
@@ -20,7 +23,8 @@ import { HomeComponent } from './derived-components/home/home.component';
     RegisterComponent,
     AttendanceComponent,
     DashboardComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    OrganisationLoginComponent
 
 
   ],
@@ -28,7 +32,8 @@ import { HomeComponent } from './derived-components/home/home.component';
     BrowserModule,
     AppRoutingModule,
     ZXingScannerModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [

@@ -19,21 +19,21 @@ export class RegisterComponent {
     private employeeService: EmployeeService
   ) {
     this.registerForm = this.fb.group({
-      name: ['', Validators.required],
+      organisationid: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+     
     });
   }
 
   onSubmit() {
     this.submitted = true;
     if (this.registerForm.valid) {
-      const { name, email, password } = this.registerForm.value;
-      const employeeData = { name, email, password };
+      const { organisationid, password } = this.registerForm.value;
+      const employeeData = { organisationid, password };
 
       this.employeeService.registerEmployee(employeeData)
         .then(response => {
-          console.log('Employee registered:', response);
+          console.log('Employee registered successfully:', response);
           
           const uuid = response.uuid;  // Assuming backend returns UUID as 'uuid'
           this.generateQRCode(uuid);  // Generate QR code from UUID

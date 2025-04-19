@@ -1,12 +1,4 @@
-.register-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 30px;
-    background: #e8f0fe;
-    border-radius: 10px;
-    text-align: center;
-  }
-  input {
+input {
     display: block;
     width: 100%;
     margin: 10px 0;

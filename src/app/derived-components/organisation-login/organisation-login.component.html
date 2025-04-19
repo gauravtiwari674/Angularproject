@@ -1,0 +1,19 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  
+    <div>
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" placeholder="Email" type="email" required />
+    </div>
+  
+    <div>
+      <label for="password">Password</label>
+      <input id="password" formControlName="password" placeholder="Password" type="password" required />
+    </div>
+  
+    <button type="submit">Login</button>
+  </form>
+  
+  <!-- Display error message if registration fails -->
+  <div *ngIf="!loginSuccess">
+    <p *ngIf="submitted && !loginForm.valid" style="color: red;">Invalid Credentials</p>
+  </div>

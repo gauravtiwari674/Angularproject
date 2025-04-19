@@ -1,14 +1,42 @@
+<div class="container mt-4">
+  <h2>Delete Employee</h2>
+
+  <form (ngSubmit)="onDelete()" #deleteForm="ngForm">
+    <div class="form-group">
+      <label for="employeeId">Enter Employee ID:</label>
+      <input
+        type="text"
+        id="employeeId"
+        name="employeeId"
+        [(ngModel)]="employeeId"
+        required
+        class="form-control"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-danger mt-3">Delete</button>
+  </form>
+
+  <div *ngIf="deleteSuccess" class="alert alert-success mt-3">
+    Employee deleted successfully.
+  </div>
+
+  <div *ngIf="deleteError" class="alert alert-danger mt-3">
+    Error deleting employee: {{ deleteError }}
+  </div>
+</div>
+
 <div class="dashboard">
     <h2>Employee Dashboard</h2>
     <table>
       <tr>
-        <th>Name</th><th>Email</th><th>UUID</th><th>Action</th>
+        <th>Employee Id</th><th>Email</th><th>Timestamp</th>
       </tr>
-      <tr *ngFor="let user of employees">
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.uuid }}</td>
-        <td><button (click)="deleteUser(user.uuid)">Delete</button></td>
+      <tr *ngFor="let log of extractedLogs">
+        <td>{{ log.employeeId }}</td>
+        <td>{{ log.email }}</td>
+        <td>{{ log.timestamp }}</td>
+        
       </tr>
     </table>
   </div>

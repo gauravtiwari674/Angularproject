@@ -11,7 +11,7 @@ export class QrService {
   // Method to mark attendance
   async markAttendance(uuid: string): Promise<any> {
     try {
-      const response = await axios.post(`${this.baseUrl}/attendance`, { uuid });
+      const response = await axios.post(`${this.baseUrl}/employee/${uuid}/attend`, { uuid });
       return response.data; // Return the response data
     } catch (error) {
       throw error; // Throw the error if something goes wrong
@@ -19,13 +19,13 @@ export class QrService {
   }
 
   // Method to generate QR code (simplified without Blob)
-  async generateQr(uuid: string): Promise<string> {
-    try {
-      const response = await axios.get(`${this.baseUrl}/generate/${uuid}`);
-      return response.data;
-     // Return the QR code as a string (URL or data URL)
-    } catch (error) {
-      throw error; // Throw the error if something goes wrong
-    }
-  }
+  // async generateQr(uuid: string): Promise<string> {
+  //   try {
+  //     const response = await axios.get(`${this.baseUrl}/generate/${uuid}`);
+  //     return response.data;
+  //    // Return the QR code as a string (URL or data URL)
+  //   } catch (error) {
+  //     throw error; // Throw the error if something goes wrong
+  //   }
+  // }
 }
