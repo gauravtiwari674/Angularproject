@@ -6,7 +6,6 @@ import * as QRCode from 'qrcode';  // Import QRCode library
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  standalone : false,
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
