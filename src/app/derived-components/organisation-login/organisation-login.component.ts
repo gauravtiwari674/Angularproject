@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeService } from '../../services/employee.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { isPlatformBrowser } from '@angular/common';
   templateUrl: './organisation-login.component.html',
   styleUrl: './organisation-login.component.css'
 })
-export class OrganisationLoginComponent {
+export class OrganisationLoginComponent implements OnInit{
   loginForm: FormGroup;
   submitted: boolean = false; 
   loginSuccess: boolean = false;
@@ -27,6 +27,13 @@ export class OrganisationLoginComponent {
       password: ['', Validators.required]
     });
   }
+
+  ngOnInit(): void {
+      if(localStorage.getItem("organisationId")){
+        window.location.href = '/dashboard';
+      }
+  }
+
     onSubmit() {
       this.submitted = true;
       if (this.loginForm.valid) {
@@ -52,5 +59,5 @@ export class OrganisationLoginComponent {
         
             });
         }
-}
+    } 
   }

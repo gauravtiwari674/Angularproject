@@ -22,10 +22,15 @@ export class AttendanceComponent {
         console.log('Attendance marked for:', uuid);
       })
       .catch(error => {
+        if(error.status == 409){
+           this.scanMessage = "Your Attendance is already marked for today.";
+        }else if(error.status == 404){
+          this.scanMessage =  "Employee Not Found.";
+        }else{
+          this.scanMessage = 'Error marking attendance. Please try again.';
+        }
         this.scanSuccess = false;
-        this.scanMessage = 'Error marking attendance. Please try again.';
         setTimeout(() => this.scanMessage = '', 3500); // Hide after 3.5s
-        console.error('Error marking attendance:', error);
       });
   }
 }

@@ -71,4 +71,9 @@ export class DashboardComponent implements OnInit{
     this.router.navigate(['/attendance']);
    }
 
+   logout(): void {
+    localStorage.removeItem("organisationId")
+    this.router.navigate(['/home']);
+   }
+
 }
