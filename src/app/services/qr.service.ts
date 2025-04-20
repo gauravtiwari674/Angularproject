@@ -12,7 +12,7 @@ export class QrService {
   async markAttendance(uuid: string): Promise<any> {
     try {
       window.alert(uuid)
-      const response = await axios.post(`https://wad-backend-8v50.onrender.com/employee/6803c3c637995339226e6ce8/attend`);
+      const response = await axios.post(`https://wad-backend-8v50.onrender.com/employee/${uuid}/attend`);
       return response.data; // Return the response data
     } catch (error) {
       throw error; // Throw the error if something goes wrong
