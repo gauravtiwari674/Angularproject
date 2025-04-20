@@ -1,6 +1,9 @@
 import { Component , OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
 import { timestamp } from 'rxjs';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -13,47 +16,53 @@ export class DashboardComponent implements OnInit{
   employee: any[] = [];
   deleteSuccess: boolean = false;
   deleteError: string = '';
+  organisationId: string | null = '';
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(
+    private employeeService: EmployeeService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
-    this.employeeService.getAllEmployees()
-    .then(response => {
-      console.log(response)
-      this.employee = response;
-    })
-    .catch(err => console.error(err));
+    if (isPlatformBrowser(this.platformId)) 
+      this.organisationId = localStorage.getItem('organisationId');
+    this.loadEmployees()
+  }
 
-}
+  loadEmployees() {
+    this.employeeService.getAllEmployees(this.organisationId)
+      .then(response => {
+        // Unwind and sort logs (descending)
+        response.forEach((emp: any) => {
+          // Sort logs descending by date
+          const sortedLogs = [...emp.logs].sort((a: string, b: string) => {
+            const parseDate = (str: string) => new Date(Date.parse(str.replace(' IST', '')));
+            return parseDate(a).getTime() - parseDate(b).getTime();
+          });
+          sortedLogs.forEach(log => {
+            this.employee.push({ id: emp.id, email: emp.email, log });
+          });
+          console.log(this.employee)
+        });
+      })
+      .catch(err => console.error(err));
+  }
+  
 
-// fetchEmployees() {
-//   this.employeeService.getAllEmployees()
-//   .then(response => {
-//     this.extractedLogs = response.logs.map((log: string) => {
-//       const parts = log.split(" ");
-//       return {
-//         employeeId: parts[1],
-//         email: parts[5],
-//         timestamp: parts[7]
-//       };
-//     });
-//   })
-//   .catch(err => console.error(err));
-// }
+  onDelete() {
+    if (!this.employeeId) return;
 
-onDelete() {
-  if (!this.employeeId) return;
-
-  this.employeeService.deleteEmployeeById(this.employeeId)
-    .then(() => {
-      this.deleteSuccess = true;
-      this.deleteError = '';
-      this.employeeId = '';
-    })
-    .catch(error => {
-      this.deleteError = error?.message || 'Something went wrong.';
-      this.deleteSuccess = false;
-    });
-}
+    this.employeeService.deleteEmployeeById(this.employeeId)
+      .then(() => {
+        this.deleteSuccess = true;
+        this.deleteError = '';
+        this.employeeId = '';
+        this.loadEmployees()
+      })
+      .catch(error => {
+        this.deleteError = error?.message || 'Something went wrong.';
+        this.deleteSuccess = false;
+      });
+  }
 
 }

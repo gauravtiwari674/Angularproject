@@ -1,4 +1,24 @@
 <div class="attendance-container">
-  <h2>Scan QR for Attendance</h2>
-  <zxing-scanner [enable]="true" (scanSuccess)="onScanSuccess($event)"></zxing-scanner>
+  <div class="attendance-card">
+    <h2>
+      <span class="material-icons qr-icon">qr_code_scanner</span>
+      Scan QR for Attendance
+    </h2>
+    <div class="scanner-wrapper">
+      <zxing-scanner
+        [enable]="true"
+        (scanSuccess)="onScanSuccess($event)"
+        class="scanner"
+      ></zxing-scanner>
+    </div>
+    <div *ngIf="scanMessage" [ngClass]="{'success': scanSuccess, 'error': !scanSuccess}" class="scan-message">
+      <span class="material-icons">
+        {{ scanSuccess ? 'check_circle' : 'error' }}
+      </span>
+      {{ scanMessage }}
+    </div>
+    <p class="note">
+      Allow camera access and hold your QR code steady within the frame.
+    </p>
+  </div>
 </div>

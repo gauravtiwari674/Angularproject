@@ -6,13 +6,13 @@ import axios from 'axios';
 })
 export class QrService {
 
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'https://wad-backend-8v50.onrender.com';
 
   // Method to mark attendance
   async markAttendance(uuid: string): Promise<any> {
     try {
       window.alert(uuid)
-      const response = await axios.post(`http://localhost:8080/employee/6803c3c637995339226e6ce8/attend`);
+      const response = await axios.post(`https://wad-backend-8v50.onrender.com/employee/6803c3c637995339226e6ce8/attend`);
       return response.data; // Return the response data
     } catch (error) {
       throw error; // Throw the error if something goes wrong

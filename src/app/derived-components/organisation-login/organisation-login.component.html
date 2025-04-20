@@ -1,19 +1,42 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  
-    <div>
-      <label for="email">Email</label>
-      <input id="email" formControlName="email" placeholder="Email" type="email" required />
+<div class="org-login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <h2>Organisation Login</h2>
+    <p class="subtitle">Access your dashboard and manage attendance securely.</p>
+    
+    <div class="form-group">
+      <label for="email">Organisation Email</label>
+      <input
+        id="email"
+        formControlName="email"
+        placeholder="Enter your email"
+        type="email"
+        required
+        [class.invalid]="submitted && loginForm.controls['email'].invalid"
+      />
+      <span class="error" *ngIf="submitted && loginForm.controls['email'].invalid">
+        Valid email is required.
+      </span>
     </div>
   
-    <div>
+    <div class="form-group">
       <label for="password">Password</label>
-      <input id="password" formControlName="password" placeholder="Password" type="password" required />
+      <input
+        id="password"
+        formControlName="password"
+        placeholder="Enter your password"
+        type="password"
+        required
+        [class.invalid]="submitted && loginForm.controls['password'].invalid"
+      />
+      <span class="error" *ngIf="submitted && loginForm.controls['password'].invalid">
+        Password is required.
+      </span>
     </div>
   
-    <button type="submit">Login</button>
+    <button type="submit" class="login-btn">Login</button>
+    
+    <div *ngIf="submitted && !loginSuccess" class="form-error">
+      {{loginError}}
+    </div>
   </form>
-  
-  <!-- Display error message if registration fails -->
-  <div *ngIf="!loginSuccess">
-    <p *ngIf="submitted && !loginForm.valid" style="color: red;">Invalid Credentials</p>
-  </div>
+</div>

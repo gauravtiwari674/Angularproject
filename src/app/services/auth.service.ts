@@ -5,7 +5,7 @@ import axios from 'axios';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/api/auth';
+  private baseUrl = 'https://wad-backend-8v50.onrender.com/api/auth';
   private currentUser: any = null;
 
   async login(email: string, password: string): Promise<any> {

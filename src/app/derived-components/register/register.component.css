@@ -1,29 +1,125 @@
 .register-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 30px;
-    background: #e8f0fe;
-    border-radius: 10px;
-    text-align: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+}
+
+.register-form, .success-section {
+  background: #fff;
+  padding: 36px 32px 32px 32px;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px rgba(60, 60, 120, 0.13);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.register-form h2 {
+  margin-bottom: 8px;
+  color: #2e3a59;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.subtitle {
+  color: #5b6b8c;
+  font-size: 1rem;
+  margin-bottom: 22px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 7px;
+  color: #2e3a59;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 12px 12px;
+  border: 1.5px solid #b7c6e3;
+  border-radius: 7px;
+  font-size: 1rem;
+  transition: border 0.2s;
+  background: #f8fbff;
+  outline: none;
+}
+
+input:focus {
+  border-color: #4f8cff;
+  background: #e6f3ff;
+}
+
+input.invalid {
+  border-color: #ff5a5a;
+  background: #fff0f0;
+}
+
+.error {
+  color: #ff5a5a;
+  font-size: 0.92rem;
+  margin-top: 4px;
+  display: block;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 13px 0;
+  background: linear-gradient(90deg, #4f8cff 0%, #2ec6ff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+  margin-top: 6px;
+  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.10);
+}
+
+.register-btn:hover {
+  background: linear-gradient(90deg, #2ec6ff 0%, #4f8cff 100%);
+  box-shadow: 0 4px 16px rgba(79, 140, 255, 0.18);
+}
+
+.form-error {
+  color: #ff5a5a;
+  background: #fff0f0;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 18px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.success-section h3 {
+  color: #24b47e;
+  margin-bottom: 12px;
+}
+
+.qr-code-container {
+  margin: 18px 0 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.qr-code-container img {
+  width: 180px;
+  height: 180px;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(79, 140, 255, 0.10);
+  background: #f8fbff;
+}
+
+@media (max-width: 500px) {
+  .register-form, .success-section {
+    padding: 18px 8px 18px 8px;
   }
-  input {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 8px;
-  }
-  button {
-    background-color: #1988ff; /* normal state */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-  }
-  
-  button:active {
-    background-color: #004999; /* subtle darker color on click */
-    transform: scale(0.98); /* optional slight shrink on click */
-  }
-  
+}

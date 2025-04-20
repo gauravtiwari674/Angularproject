@@ -1,45 +1,75 @@
-<div class="container mt-4">
-  <h2>Delete Employee</h2>
+<div class="dashboard-page">
+  <!-- Delete Employee Card -->
 
-  <form (ngSubmit)="onDelete()" #deleteForm="ngForm">
-    <div class="form-group">
-      <label for="employeeId">Enter Employee ID:</label>
-      <input
-        type="text"
-        id="employeeId"
-        name="employeeId"
-        [(ngModel)]="employeeId"
-        required
-        class="form-control"
-      />
+  <div class="dashboard-card organisation-info-card">
+    <h3>
+      <span class="material-icons dashboard-icon">business</span>
+      Organisation ID
+    </h3>
+    <div class="organisation-id-display">
+      {{ organisationId || 'Not available' }}
     </div>
-
-    <button type="submit" class="btn btn-danger mt-3">Delete</button>
-  </form>
-
-  <div *ngIf="deleteSuccess" class="alert alert-success mt-3">
-    Employee deleted successfully.
+  </div>
+  <div class="dashboard-card">
+    <h2>
+      <span class="material-icons dashboard-icon">person_remove</span>
+      Delete Employee
+    </h2>
+    <form (ngSubmit)="onDelete()" #deleteForm="ngForm" autocomplete="off">
+      <div class="form-group">
+        <label for="employeeId">Employee ID</label>
+        <input
+          type="text"
+          id="employeeId"
+          name="employeeId"
+          [(ngModel)]="employeeId"
+          required
+          class="form-control"
+          placeholder="Enter Employee ID"
+          autocomplete="off"
+        />
+      </div>
+      <button type="submit" class="dashboard-btn danger-btn">Delete</button>
+    </form>
+    <div *ngIf="deleteSuccess" class="dashboard-alert success">
+      <span class="material-icons">check_circle</span>
+      Employee deleted successfully.
+    </div>
+    <div *ngIf="deleteError" class="dashboard-alert error">
+      <span class="material-icons">error</span>
+      Error deleting employee: {{ deleteError }}
+    </div>
   </div>
 
-  <div *ngIf="deleteError" class="alert alert-danger mt-3">
-    Error deleting employee: {{ deleteError }}
+  <!-- Employee Dashboard Card -->
+  <div class="dashboard-card">
+    <h2>
+      <span class="material-icons dashboard-icon">dashboard</span>
+      Employee Dashboard
+    </h2>
+    <div class="dashboard-table-wrapper">
+      <table *ngIf="employee.length > 0; else noEmployees">
+        <thead>
+          <tr>
+            <th>Employee Id</th>
+            <th>Email</th>
+            <th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of employee">
+            <td>{{ emp.id }}</td>
+            <td>{{ emp.email }}</td>
+            <td>{{ emp.log }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #noEmployees>
+        <div class="dashboard-alert info" style="text-align:center;">
+          <span class="material-icons">info</span>
+          No employees found.
+        </div>
+      </ng-template>
+    </div>
   </div>
-</div>
-
-<div class="dashboard">
-  <h2>Employee Dashboard</h2>
-  <table>
-    <tr>
-      <th>Employee Id</th>
-      <th>Email</th>
-      <th>Timestamp</th>
-    </tr>
-    <ng-container *ngFor="let emp of employee">
-      <tr *ngFor="let log of emp.logs">
-        <td>{{ emp.id }}</td>
-        <td>{{ emp.email }}</td>
-        <td>{{ log }}</td>
-      </tr>
-    </ng-container>
-  </table>
 </div>

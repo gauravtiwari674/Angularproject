@@ -5,6 +5,7 @@ import * as QRCode from 'qrcode';  // Import QRCode library
 
 @Component({
   selector: 'app-register',
+  standalone:false,
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -13,6 +14,7 @@ export class RegisterComponent {
   qrCode: string = '';  // To store the generated QR code
   registrationSuccess: boolean = false;  // Flag to display the success message
   submitted: boolean = false; 
+  formError: string = ""
   constructor(
     private fb: FormBuilder,
     private employeeService: EmployeeService
@@ -44,9 +46,9 @@ export class RegisterComponent {
         .catch(error => {
           console.error('Registration failed:', error);
           if(error.status==404){
-            window.alert("Organisation ID not Found");
+            this.formError = "Organisation ID not Found";
           }else if(error.status==409){
-            window.alert("Email Already Registered");
+            this.formError = "Email Already Registered";
           }  
           this.registrationSuccess = false;
         });

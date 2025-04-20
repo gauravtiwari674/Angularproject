@@ -1,6 +1,31 @@
 <div class="container">
+  <div class="hero">
     <h1>Welcome to Org Portal</h1>
-    <p>This is the homepage for employees and admins.</p>
-    <button (click)="navigateToRegister()">Employee Register</button>
-    <button (click)="navigateToLogin()">Organisation Login</button>
+    <p class="subtitle">
+      Effortless attendance with QR codes.<br>
+      Empowering employees and organizations.
+    </p>
+    <div class="actions">
+      <button class="primary" (click)="navigateToRegister()">
+        <span class="material-icons">person_add</span>
+        Employee Register
+      </button>
+      <button class="secondary" (click)="navigateToLogin()">
+        <span class="material-icons">business</span>
+        Organisation Login
+      </button>
+    </div>
   </div>
+  <div class="features">
+    <div class="feature">
+      <span class="material-icons">qr_code_scanner</span>
+      <h3>QR Code Attendance</h3>
+      <p>Quick and secure check-ins for employees using QR codes.</p>
+    </div>
+    <div class="feature">
+      <span class="material-icons">dashboard</span>
+      <h3>Organisation Dashboard</h3>
+      <p>Real-time attendance tracking and analytics for admins.</p>
+    </div>
+  </div>
+</div>
