@@ -3,6 +3,7 @@ import { EmployeeService } from '../../services/employee.service';
 import { timestamp } from 'rxjs';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class DashboardComponent implements OnInit{
 
   constructor(
     private employeeService: EmployeeService,
+    private router : Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -64,5 +66,9 @@ export class DashboardComponent implements OnInit{
         this.deleteSuccess = false;
       });
   }
+
+  navigateToAttendance(): void {
+    this.router.navigate(['/attendance']);
+   }
 
 }

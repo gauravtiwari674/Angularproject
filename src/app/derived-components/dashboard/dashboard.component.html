@@ -1,6 +1,11 @@
 <div class="dashboard-page">
-  <!-- Delete Employee Card -->
+  <!-- Mark Attendance Button -->
+  <button class="dashboard-btn attendance-btn" (click)="navigateToAttendance()">
+    <span class="material-icons">qr_code_scanner</span>
+    Mark Attendance
+  </button>
 
+  <!-- Organisation Info Card -->
   <div class="dashboard-card organisation-info-card">
     <h3>
       <span class="material-icons dashboard-icon">business</span>
@@ -10,6 +15,8 @@
       {{ organisationId || 'Not available' }}
     </div>
   </div>
+
+  <!-- Delete Employee Card -->
   <div class="dashboard-card">
     <h2>
       <span class="material-icons dashboard-icon">person_remove</span>

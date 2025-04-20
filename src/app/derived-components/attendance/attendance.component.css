@@ -54,6 +54,15 @@
   display: block;
 }
 
+::ng-deep zxing-scanner video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 12px;
+  background: #000;
+  display: block;
+}
+
 /* Responsive for mobile */
 @media (max-width: 500px) {
   .attendance-card {
