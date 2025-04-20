@@ -11,8 +11,12 @@ export class QrService {
   // Method to mark attendance
   async markAttendance(uuid: string): Promise<any> {
     try {
+      if(!localStorage.getItem("organisationId")){
+        window.location.href = "/home"
+        return;
+      }
       window.alert(uuid)
-      const response = await axios.post(`https://wad-backend-8v50.onrender.com/employee/${uuid}/attend`);
+      const response = await axios.post(`https://wad-backend-8v50.onrender.com/employee/${uuid}/attend/${localStorage.getItem("organisationId")}`);
       return response.data; // Return the response data
     } catch (error) {
       throw error; // Throw the error if something goes wrong
