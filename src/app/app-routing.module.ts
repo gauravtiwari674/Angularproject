@@ -6,6 +6,7 @@ import { DashboardComponent } from './derived-components/dashboard/dashboard.com
 import { AttendanceComponent } from './derived-components/attendance/attendance.component';
 import { DeleteUserComponent } from './derived-components/delete-user/delete-user.component';
 import { HomeComponent } from './derived-components/home/home.component';
+import { OrgRegisterComponent } from './derived-components/register-org/register.component';
 
 import { adminGuard } from './guards/admin.guard';
 import { watchmanGuard } from './guards/watchman.guard';
@@ -16,6 +17,7 @@ const routes: Routes = [
 
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'org/register', component: OrgRegisterComponent },
   { path: 'login', component: OrganisationLoginComponent },
 
   { path: 'dashboard', component: DashboardComponent },

@@ -14,7 +14,7 @@ import { AttendanceComponent } from './derived-components/attendance/attendance.
 import { DeleteUserComponent } from './derived-components/delete-user/delete-user.component';
 import { HomeComponent } from './derived-components/home/home.component';
 import { OrganisationLoginComponent } from './derived-components/organisation-login/organisation-login.component';
-
+import { OrgRegisterComponent } from './derived-components/register-org/register.component'
 
 @NgModule({
   declarations: [
@@ -24,8 +24,8 @@ import { OrganisationLoginComponent } from './derived-components/organisation-lo
     AttendanceComponent,
     DashboardComponent,
     DeleteUserComponent,
-    OrganisationLoginComponent
-
+    OrganisationLoginComponent,
+    OrgRegisterComponent
 
   ],
   imports: [

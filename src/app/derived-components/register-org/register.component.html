@@ -1,0 +1,53 @@
+<div class="register-container">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form" *ngIf="!registrationSuccess">
+    <h2>Organisation Registration</h2>
+    <p class="subtitle">Register your Organisation.</p>
+    
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        formControlName="email"
+        placeholder="Enter Email ID"
+        type="text"
+        required
+        [class.invalid]="submitted && registerForm.controls['email'].invalid"
+      />
+      <span class="error" *ngIf="submitted && registerForm.controls['email'].invalid">
+        Email ID is required.
+      </span>
+    </div>
+  
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        formControlName="password"
+        placeholder="Enter your Password"
+        type="password"
+        required
+        [class.invalid]="submitted && registerForm.controls['password'].invalid"
+      />
+      <span class="error" *ngIf="submitted && registerForm.controls['password'].invalid">
+        Password is required.
+      </span>
+    </div>
+  
+    <button type="submit" class="register-btn">Register</button>
+    <div *ngIf="submitted && !registerForm.valid" class="form-error">
+      Please fill out the form correctly.
+    </div>
+
+    <div *ngIf="!registrationSuccess && formError" class="form-error">
+      {{formError}}
+    </div>
+
+  </form>
+
+    
+
+  <!-- Success and QR code display -->
+  <div class="success-section" *ngIf="registrationSuccess">
+    <h3>Registration Successful ! Please Login </h3>
+  </div>
+</div>
