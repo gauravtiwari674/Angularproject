@@ -44,9 +44,9 @@ export class DashboardComponent implements OnInit{
           })
         });
 
-        this.employee = [...this.employee.sort((a,b) => {
+        this.employee = [...this.employee.sort((b,a) => {
           const parseDate = (str: string) => new Date(Date.parse(str.split(' IST')[0]));
-          return parseDate(a).getTime() - parseDate(b).getTime();
+          return parseDate(a.log).getTime() - parseDate(b.log).getTime();
         })]
       })
       .catch(err => console.error(err));
