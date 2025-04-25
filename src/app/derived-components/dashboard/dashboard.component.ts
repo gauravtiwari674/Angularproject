@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit{
         response.forEach((emp: any) => {
           // Sort logs descending by date
           const sortedLogs = [...emp.logs].sort((b: string, a: string) => {
-            const parseDate = (str: string) => new Date(Date.parse(str.replace(' IST', '')));
+            const parseDate = (str: string) => new Date(Date.parse(str.split(' IST')[0]));
             return parseDate(a).getTime() - parseDate(b).getTime();
           });
           sortedLogs.forEach(log => {
