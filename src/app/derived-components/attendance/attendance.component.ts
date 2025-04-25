@@ -14,6 +14,10 @@ export class AttendanceComponent {
   scanSuccess: boolean = false;
 
   onScanSuccess(uuid: string) {
+    const confirm = window.confirm("Please Confirm User ID : "+uuid)
+    if(!confirm){
+      return;
+    }
     this.qrService.markAttendance(uuid)
       .then(response => {
         this.scanSuccess = true;
