@@ -31,21 +31,23 @@ export class DashboardComponent implements OnInit{
     this.loadEmployees()
   }
 
+  // const parseDate = (str: string) => new Date(Date.parse(str.split(' IST')[0]));
+  //return parseDate(a).getTime() - parseDate(b).getTime();
+
   loadEmployees() {
     this.employeeService.getAllEmployees(this.organisationId)
       .then(response => {
         // Unwind and sort logs (descending)
         response.forEach((emp: any) => {
-          // Sort logs descending by date
-          const sortedLogs = [...emp.logs].sort((b: string, a: string) => {
-            const parseDate = (str: string) => new Date(Date.parse(str.split(' IST')[0]));
-            return parseDate(a).getTime() - parseDate(b).getTime();
-          });
-          sortedLogs.forEach(log => {
+          emp.logs.forEach((log : string )=> {
             this.employee.push({ id: emp.id, email: emp.email, log });
-          });
-          console.log(this.employee)
+          })
         });
+
+        this.employee = [...this.employee.sort((a,b) => {
+          const parseDate = (str: string) => new Date(Date.parse(str.split(' IST')[0]));
+          return parseDate(a).getTime() - parseDate(b).getTime();
+        })]
       })
       .catch(err => console.error(err));
   }
