@@ -17,13 +17,13 @@ export class AttendanceComponent {
     this.qrService.markAttendance(uuid)
       .then(response => {
         this.scanSuccess = true;
-        this.scanMessage = 'Attendance marked successfully!';
+        this.scanMessage = response.message;
         setTimeout(() => this.scanMessage = '', 3000); // Hide after 3s
         console.log('Attendance marked for:', uuid);
       })
       .catch(error => {
         if(error.status == 409){
-           this.scanMessage = "Your Attendance is already marked for today.";
+           this.scanMessage = "Your Attendance is already Completed for today.";
         }else if(error.status == 404){
           this.scanMessage =  "Employee Not Found.";
         }else{

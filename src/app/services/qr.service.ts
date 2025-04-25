@@ -15,7 +15,7 @@ export class QrService {
         window.location.href = "/home"
         return;
       }
-      window.alert(uuid)
+      window.alert("Please Confirm User ID : "uuid)
       const response = await axios.post(`https://wad-backend-8v50.onrender.com/employee/${uuid}/attend/${localStorage.getItem("organisationId")}`);
       return response.data; // Return the response data
     } catch (error) {
