@@ -4,6 +4,7 @@ import { timestamp } from 'rxjs';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
+import { OrganisationService } from '../../services/org.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class DashboardComponent implements OnInit{
 
   constructor(
     private employeeService: EmployeeService,
+    private organisationService: OrganisationService,
     private router : Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
@@ -76,6 +78,17 @@ export class DashboardComponent implements OnInit{
    logout(): void {
     localStorage.removeItem("organisationId")
     this.router.navigate(['/home']);
+   }
+
+   deleteOrganisation(): void {
+    this.organisationService.deleteOrg(this.organisationId as string).then((response) => {
+      window.alert("Organisation Deleted Successfully")
+      localStorage.removeItem('organisationId')
+      window.location.href = "/";
+    }).catch((error) => {
+      console.error(error);
+      window.alert("You cannot delete Organisation with employees. Please delete all employees first.")
+    })
    }
 
 }
